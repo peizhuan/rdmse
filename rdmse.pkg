@@ -1,0 +1,20 @@
+v 2.0
+d Date: 20210110
+d rdmse.  MSE estimation for local polynomial RD and RK estimators
+d Zhuan Pei, Cornell University
+f altfrdbwselect.ado
+f altrdbwselect.ado
+f altrdvce.ado
+f altrdvce.mo
+f kconst.ado
+f kweight.mo
+f rdmse.ado
+f rdmse_cct2014.ado
+f rdmsef.ado
+f rdmsef_cct2014.ado
+f rdmses.ado
+f rdmses_cct2014.ado
+f rdmses2s.ado
+f rdvce.mo
+f regconst.mo
+f rdmse.sthlp
