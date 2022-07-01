@@ -1,3 +1,4 @@
+*This file was taken from the rdrobust package by Calonico, Cattaneo, Titiunik
 *!version 6.0  14Oct2014 
 
 capture program drop kconst

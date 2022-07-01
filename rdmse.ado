@@ -1,6 +1,9 @@
 *version 2.0 January 2021
 *Add option to allow different polynomial orders and bandwidths on two sides of the threshold
-*Following the update of rdrobust, changed to a more stable way matrix inverse is taken
+*Following the update of rdrobust, changed to a more stable method for inverting matrices
+
+*version 2.1 July 2022
+*Fixed minor bug that returns an error message when kernel is specified as "triangular"
 
 set type double
 capture program drop rdmse

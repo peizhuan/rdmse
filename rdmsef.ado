@@ -1,5 +1,9 @@
 *version 2.0 January 2021
-*Following the update of rdrobust, changed to a more stable way matrix inverse is taken
+*Following the update of rdrobust, changed to a more stable method for inverting matrices
+
+*version 2.1 July 2022
+*Fixed minor bug that returns an error message when kernel is specified as "triangular"
+
 set type double
 capture program drop rdmsef
 program define rdmsef, eclass
@@ -55,7 +59,7 @@ program define rdmsef, eclass
 	 exit 2001
 	}
 		
-	if ("`kernel'"~="uni" & "`kernel'"~="uniform" & "`kernel'"~="tri" & "`kernel'"~="" ){
+	if ("`kernel'"~="uni" & "`kernel'"~="uniform" & "`kernel'"~="tri" & "`kernel'"~="triangular" & "`kernel'"~="" ){
 	 di "{err}{cmd:kernel()} incorrectly specified"  
 	 exit 7
 	}

@@ -1,5 +1,9 @@
 *version 1.0 January 2021
 *accommodates different bandwidths and polynomial orders on two sides of the threshold
+
+*version 1.1 July 2022
+*Fixed minor bug that returns an error message when kernel is specified as "triangular"
+
 set type double
 capture program drop rdmses2s
 program define rdmses2s, eclass
@@ -56,7 +60,7 @@ program define rdmses2s, eclass
 	 exit 2001
 	}
 		
-	if ("`kernel'"~="uni" & "`kernel'"~="uniform" & "`kernel'"~="tri" & "`kernel'"~="" ){
+	if ("`kernel'"~="uni" & "`kernel'"~="uniform" & "`kernel'"~="tri" & "`kernel'"~="triangular" & "`kernel'"~="" ){
 	 di "{err}{cmd:kernel()} incorrectly specified"  
 	 exit 7
 	}
