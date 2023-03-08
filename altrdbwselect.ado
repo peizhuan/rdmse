@@ -3,6 +3,7 @@
 
 capture program drop altrdbwselect
 program define altrdbwselect, eclass
+	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) p(real 1) q(real 0) kernel(string) bwselect(string) rho(real 0) vce(string) matches(real 3) delta(real 0.5) cvgrid_min(real 0) cvgrid_max(real 0) cvgrid_length(real 0) cvplot all precalc scaleregul(real 1) ]
 
 	local kernel = lower("`kernel'")

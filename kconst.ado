@@ -3,6 +3,7 @@
 
 capture program drop kconst
 program define kconst, eclass
+	version 15.0
 	syntax anything
 	
 	tokenize "`anything'"

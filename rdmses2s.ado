@@ -4,9 +4,13 @@
 *version 1.1 July 2022
 *Fixed minor bug that returns an error message when kernel is specified as "triangular"
 
+*version 1.2 March 2023
+*Updated Stata version number
+
 set type double
 capture program drop rdmses2s
 program define rdmses2s, eclass
+	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) pl(real 1) pr(real 1) hl(real 0) hr(real 0) bl(real 0) br(real 0) kernel(string) scalepar(real 1)]
 	
 	marksample touse

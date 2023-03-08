@@ -3,8 +3,12 @@
 *version 1.2 July 2022
 *Fixed minor bug that returns an error message when kernel is specified as "triangular"
 
+*version 1.3 March 2023
+*Updated Stata version number
+
 capture program drop rdmsef_cct2014
 program define rdmsef_cct2014, eclass
+	version 15.0
 	syntax anything [if] [in] [, c(real 0) fuzzy(string) deriv(real 0) p(real 1) h(real 0) b(real 0) kernel(string) scalepar(real 1)]
 	
 	marksample touse

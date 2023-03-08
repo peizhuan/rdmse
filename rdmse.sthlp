@@ -44,7 +44,7 @@
 {marker description}{...}
 {title:Description}
 
-{p 4 8 8}{cmd:rdmse} computes the (asymptotic) mean squared error (MSE) of a local polynomial RD/RK estimator as proposed in Card, Lee, Pei, Weber (2018, 2020). 
+{p 4 8 8}{cmd:rdmse} computes the (asymptotic) mean squared error (MSE) of a local polynomial RD/RK estimator as proposed in Card, Lee, Pei, Weber (2022). 
 It displays and returns the estimated MSE for the conventional estimator and its bias corrected counterpart as defined in Calonico, Cattaneo, Titiunik (2014a).{p_end}
 
 {p 4 8 8}{cmd:rdmse_cct2014} computes the (A)MSE for a conventional RD/RK estimator by gathering the relevant quantities calculated by the 2014 implementation of {bf}rdrobust{sf}, {bf}rdrobust_2014{sf} by Calonico, Cattaneo and Titiunik. 
@@ -168,14 +168,11 @@ As with {cmd:rdmse}, it speeds up the computation in Calonico, Cattaneo, Titiuni
 {p 4 8}Calonico, S., M. D. Cattaneo, M. H. Farrell, and R. Titiunik. 2017. {cmd:rdrobust}: Software for Regression-Discontinuity Designs. {it:Stata Journal} 17(2): 372-404. 
 {browse "https://journals.sagepub.com/doi/abs/10.1177/1536867X1701700208"}.
 
-{p 4 8}Card, D., D. S. Lee, Z. Pei, and A. Weber. 2018. Princeton University Industrial Relations Section Working Paper #622.
-{browse "https://irs.princeton.edu/publications/working-papers/local-polynomial-order-regression-discontinuity-designs"}.
-
 {p 4 8}Calonico, S., M. D. Cattaneo, M. H. Farrell, and R. Titiunik. 2019. Regression Discontinuity Designs Using Covariates. {it:Review of Economics and Statistics} 101(3): 442-451.
 {browse "https://www.mitpressjournals.org/doi/abs/10.1162/rest_a_00760"}.
 
-{p 4 8}Card, D., D. S. Lee, Z. Pei, and A. Weber. 2020. NBER Working Paper #622.
-{browse "https://www.nber.org/papers/w27424"}.
+{p 4 8}Card, D., D. S. Lee, Z. Pei, and A. Weber. 2022. Local Polynomial Order in Regression Discontinuity Designs. {it: Journal of Business and Economic Statistics} 40(3): 1259-1267.
+{browse "https://www.tandfonline.com/doi/full/10.1080/07350015.2021.1920961"}.
 
 {title:Author}
 

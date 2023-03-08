@@ -1,5 +1,6 @@
 
 capture mata mata drop altrdvce()
+version 15.0
 mata
 real matrix altrdvce(real matrix X, real matrix y, real matrix z, real scalar p, real scalar h, real scalar matches, string vce, string kernel)
 {

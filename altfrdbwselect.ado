@@ -3,6 +3,7 @@
 
 capture program drop altfrdbwselect
 program define altfrdbwselect, eclass
+	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) fuzzy(string) p(real 1) q(real 2) kernel(string) bwselect(string) rho(real 0) vce(string) matches(real 3) scaleregul(real 1) ]
 
 	local kernel = lower("`kernel'")
