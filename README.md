@@ -5,6 +5,8 @@ Companion package to Pei, Lee, Card, Weber (2022), [Local Polynomial Order in Re
 
 # Updates
 
+March 8, 2023: Added Stata version number and submitted package to SSC. Also updated a reference in the help file. 
+
 December 31, 2022: Fixed a bug that led to an error with subsetting syntax. Please run the updated code if you previously specified "if" or "in" as part of your rdmse command -- apologies for the inconvenience. Credit to Melle Albada at Vienna University of Economics and Business for alerting me to this error. 
 
 July 1, 2022: Fixed a minor bug that returned an error message when kernel was specified as "triangular" as opposed to "tri". Credit to Tomoaki Tanaka (MRes/PhD student at the Queen Mary University of London) for alerting me to this error. 
