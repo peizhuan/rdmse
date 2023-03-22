@@ -5,6 +5,8 @@ Companion package to Pei, Lee, Card, Weber (2022), [Local Polynomial Order in Re
 
 # Updates
 
+March 22, 2023: Added demo data file rdrobust_senate.dta per Kit Baum's suggestion (preparing to submit the package to ssc); changed programs from eclass to rclass; updated package and help file.
+
 March 8, 2023: Added Stata version number and submitted package to SSC. Also updated a reference in the help file. 
 
 December 31, 2022: Fixed a bug that led to an error with subsetting syntax. Please run the updated code if you previously specified "if" or "in" as part of your rdmse command -- apologies for the inconvenience. Credit to Melle Albada at Vienna University of Economics and Business for alerting me to this error. 
