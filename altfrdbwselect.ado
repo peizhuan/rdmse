@@ -1,8 +1,13 @@
-* Updated Jan 2 2021* Updated Oct 2020 - Jan 2021
-* Following the update of rdrobust, changed to a more stable way matrix inverse is taken
+* Updated Jan 2021: Following the update of rdrobust, changed to a more stable way matrix inverse is taken
+
+* Updated Mar 2023: 
+* Added Stata version number
+* Per Kit Baum's suggestion, changed program from eclass to rclass
+* These changes do not affect any calculation
+
 
 capture program drop altfrdbwselect
-program define altfrdbwselect, eclass
+program define altfrdbwselect, rclass
 	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) fuzzy(string) p(real 1) q(real 2) kernel(string) bwselect(string) rho(real 0) vce(string) matches(real 3) scaleregul(real 1) ]
 
@@ -150,8 +155,8 @@ program define altfrdbwselect, eclass
 	if ("`bwselect'"=="IK") {
 
 		qui altrdbwselect `y' `x', c(`c') deriv(`deriv') p(`p') q(`q') bwselect(`bwselect') kernel(`kernel') vce(`vce') precalc scaleregul(`scaleregul')
-		local h = e(h_IK)
-		local b = e(b_IK)
+		local h = r(h_IK)
+		local b = r(b_IK)
 		local bwselect = "IK"
 	}
 
@@ -159,8 +164,8 @@ program define altfrdbwselect, eclass
 
 		local bwselect = "CCT"
 		qui altrdbwselect `y' `x', c(`c') deriv(`deriv') p(`p') q(`q') matches(`matches') bwselect(`bwselect') kernel(`kernel') vce(`vce') precalc scaleregul(`scaleregul')
-		local h = e(h_CCT)
-		local b = e(b_CCT)
+		local h = r(h_CCT)
+		local b = r(b_CCT)
 	}	
 
 	disp in yellow "Obtaining preliminary RD estimates" 	
@@ -671,24 +676,24 @@ program define altfrdbwselect, eclass
 	disp "In comparison, the h and b obtained by treating the outcome equation as a sharp design are `h_prelim' and `b_prelim' respectively."
 	
 	restore
-	ereturn clear
-	ereturn scalar N_l = `N_l'
-	ereturn scalar N_r = `N_r'
-	ereturn scalar c = `c'
-	ereturn scalar p = `p'
-	ereturn scalar q = `q'
+	return clear
+	return scalar N_l = `N_l'
+	return scalar N_r = `N_r'
+	return scalar c = `c'
+	return scalar p = `p'
+	return scalar q = `q'
 	
 	if ("`bwselect'"=="CCT" | "`bwselect'"=="") {
-	ereturn scalar h_F_CCT = h_F_CCT
-	ereturn scalar b_F_CCT = b_F_CCT
+	return scalar h_F_CCT = h_F_CCT
+	return scalar b_F_CCT = b_F_CCT
 	}
 	if ("`bwselect'"=="IK") {
-	ereturn scalar h_F_IK   = h_F_IK
-	ereturn scalar b_F_IK   = b_F_IK
+	return scalar h_F_IK   = h_F_IK
+	return scalar b_F_IK   = b_F_IK
 	}
 	
-	ereturn scalar h_prelim = `h_prelim'
-	ereturn scalar b_prelim = `b_prelim'
+	return scalar h_prelim = `h_prelim'
+	return scalar b_prelim = `b_prelim'
 	
 	*mata mata clear
 

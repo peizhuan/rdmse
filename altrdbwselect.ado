@@ -1,8 +1,12 @@
-* Updated Oct 2020 - Jan 2021
-* Following the update of rdrobust, changed to a more stable way matrix inverse is taken
+* Updated Jan 2021: Following the update of rdrobust, changed to a more stable way matrix inverse is taken
+
+* Updated Mar 2023: 
+* Added Stata version number
+* Per Kit Baum's suggestion, changed program from eclass to rclass
+* These changes do not affect any calculation
 
 capture program drop altrdbwselect
-program define altrdbwselect, eclass
+program define altrdbwselect, rclass
 	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) p(real 1) q(real 0) kernel(string) bwselect(string) rho(real 0) vce(string) matches(real 3) delta(real 0.5) cvgrid_min(real 0) cvgrid_max(real 0) cvgrid_length(real 0) cvplot all precalc scaleregul(real 1) ]
 
@@ -580,23 +584,23 @@ program define altrdbwselect, eclass
 	}
 
 	restore
-	ereturn clear
-	ereturn scalar N_l = `N_l'
-	ereturn scalar N_r = `N_r'
-	ereturn scalar c = `c'
-	ereturn scalar p = `p'
-	ereturn scalar q = `q'
+	return clear
+	return scalar N_l = `N_l'
+	return scalar N_r = `N_r'
+	return scalar c = `c'
+	return scalar p = `p'
+	return scalar q = `q'
 	
 	if ("`bwselect'"=="CCT" | "`bwselect'"=="" | "`all'"~="") {
-	ereturn scalar h_CCT = h_CCT
-	ereturn scalar b_CCT = b_CCT
+	return scalar h_CCT = h_CCT
+	return scalar b_CCT = b_CCT
 	}
 	if ("`bwselect'"=="IK" | "`all'"~="") {
-	ereturn scalar h_IK   = h_IK
-	ereturn scalar b_IK   = b_IK
+	return scalar h_IK   = h_IK
+	return scalar b_IK   = b_IK
 	}
 	if ("`bwselect'"=="CV" | "`all'"~="") {
-	ereturn scalar h_CV   = h_CV
+	return scalar h_CV   = h_CV
 	}
 	
 	*mata mata clear
