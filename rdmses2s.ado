@@ -6,10 +6,12 @@
 
 *version 1.2 March 2023
 *Updated Stata version number
+*Per Kit Baum's suggestion, changed program from eclass to rclass
+*These changes do not affect any calculation
 
 set type double
 capture program drop rdmses2s
-program define rdmses2s, eclass
+program define rdmses2s, rclass
 	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) pl(real 1) pr(real 1) hl(real 0) hr(real 0) bl(real 0) br(real 0) kernel(string) scalepar(real 1)]
 	
@@ -427,10 +429,10 @@ program define rdmses2s, eclass
 		di "the AMSE for the bias-corrected right-side estimator of order `pr' cannot be computed."
 		}
 		
-	ereturn scalar amse_l_cl = amse_l_cl
-	ereturn scalar amse_r_cl = amse_r_cl	
-	ereturn scalar amse_l_bc = amse_l_bc
-	ereturn scalar amse_r_bc = amse_r_bc			
+	return scalar amse_l_cl = amse_l_cl
+	return scalar amse_r_cl = amse_r_cl	
+	return scalar amse_l_bc = amse_l_bc
+	return scalar amse_r_bc = amse_r_bc			
 			
 	*mata mata clear
 

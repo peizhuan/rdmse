@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 2.0 10JAN2021}{...}
+{* *! version 2.3 22MAR2023}{...}
 
 {title:Title}
 
@@ -44,7 +44,7 @@
 {marker description}{...}
 {title:Description}
 
-{p 4 8 8}{cmd:rdmse} computes the (asymptotic) mean squared error (MSE) of a local polynomial RD/RK estimator as proposed in Card, Lee, Pei, Weber (2022). 
+{p 4 8 8}{cmd:rdmse} computes the (asymptotic) mean squared error (MSE) of a local polynomial RD/RK estimator as proposed in Pei, Lee, Card, Weber (2022). 
 It displays and returns the estimated MSE for the conventional estimator and its bias corrected counterpart as defined in Calonico, Cattaneo, Titiunik (2014a).{p_end}
 
 {p 4 8 8}{cmd:rdmse_cct2014} computes the (A)MSE for a conventional RD/RK estimator by gathering the relevant quantities calculated by the 2014 implementation of {bf}rdrobust{sf}, {bf}rdrobust_2014{sf} by Calonico, Cattaneo and Titiunik. 
@@ -89,61 +89,66 @@ Default is {cmd:scalepar(1)}.
 
 {marker examples}{...}
 
+{title:Example: Cattaneo, Frandsen and Titiunik (2015) Incumbency Data}
+
+{p 4 8}This is the same demo dataset as that included in the {cmd: rdrobust} package. Load data{p_end}
+{p 8 8}{cmd:. use rdrobust_senate.dta}{p_end}
+
+{p 4 8}MSE estimation for local linear sharp RD estimator with uniform kernel and CCT bandwidths (Calonico, Cattaneo, Titiunik 2014a, 2014b){p_end}
+{p 4 8}First estimate the CCT bandwidths using {cmd:altrdbwselect} included in the package{p_end}
+{p 8 12}{cmd:. altrdbwselect vote margin, c(0) deriv(0) p(1) q(2) kernel(uniform) bwselect(CCT)}{p_end}
+{p 8 12}{cmd:. local bw_h=r(h_CCT)}{p_end}
+{p 8 12}{cmd:. local bw_b=r(b_CCT)}{p_end}
+{p 4 8}Then estimate the MSE by passing the CCT bandwidths as arguments{p_end}
+{p 8 12}{cmd:. rdmse vote margin, deriv(0) c(0) p(1) h(`bw_h') b(`bw_b') kernel(uniform)}{p_end}
+
+{p 4 8}Estimate the MSE of a sharp local linear RD estimator with manual bandwidths{p_end}
+{p 8 12}{cmd:. rdmse vote margin, deriv(0) c(0) p(1) h(10) b(20) kernel(uniform)}{p_end}
+
+{p 4 8}Estimate the MSEs of the left- and right- intercept estimators constructed with different polynomial orders and bandwidths on two sides of the threshold{p_end}
+{p 8 12}{cmd:. rdmse vote margin, c(0) deriv(0) twosided pl(1) pr(2) hl(10) hr(15) bl(20) br(30) kernel(uniform)}{p_end}  
+
 {title:Generic Examples:}
 
 {p 4 8}Let {cmd:Y} be the outcome variable and {cmd:x} the running variable:{p_end}
 
-{p 4 8}MSE Estimation for local linear sharp RD estimator with uniform kernel and CCT bandwidths (Calonico, Cattaneo, Titiunik 2014a, 2014b){p_end}
-{p 4 8}First estimate the CCT bandwidths using {cmd:altrdbwselect} included in the package{p_end}
-{p 8 12}{cmd:. altrdbwselect Y x, c(0) deriv(0) p(1) q(2) kernel(uniform) bwselect(CCT)}{p_end}
-{p 8 12}{cmd:. local bw_h=e(h_CCT)}{p_end}
-{p 8 12}{cmd:. local bw_b=e(b_CCT)}{p_end}
-{p 4 8}Then estimate the MSE by passing the CCT bandwidths as arguments{p_end}
-{p 8 12}{cmd:. rdmse Y x, deriv(0) c(0) p(1) h(`bw_h') b(`bw_b') kernel(uniform)}{p_end}
-
-{p 4 8}Estimate the MSE of the sharp local linear RD estimator with manual bandwidths{p_end}
-{p 8 12}{cmd:. rdmse Y x, deriv(0) c(0) p(1) h(0.5) b(1.2) kernel(uniform)}{p_end}
-
-{p 4 8}Estimate the MSE of the sharp local linear RK estimator{p_end}
-{p 8 12}{cmd:. rdmse Y x, deriv(0) c(0) p(1) h(0.5) b(1.2) kernel(uniform)}{p_end}
-
-{p 4 8}Estimate the MSEs of the left- and right- intercept estimators constructed with different polynomial orders and bandwidths on two sides of the threshold{p_end}
-{p 8 12}{cmd:. rdmse Y x, c(0) deriv(0) twosided pl(1) pr(2) hl(0.5) hr(0.45) bl(1.2) br(1.1) kernel(uniform)}{p_end}  
+{p 4 8}Estimate the MSE of a sharp local linear RK estimator{p_end}
+{p 8 12}{cmd:. rdmse Y x, deriv(1) c(0) p(1) h(10) b(20) kernel(uniform)}{p_end}
 
 {p 4 8}Let {cmd:T} be the treatment variable.{p_end}
 
-{p 4 8}MSE Estimation for local linear fuzzy RD estimator with uniform kernel and "fuzzy CCT" bandwidths (Card, Lee, Pei, Weber 2015){p_end}
+{p 4 8}MSE estimation for local linear fuzzy RD estimator with uniform kernel and "fuzzy CCT" bandwidths (Card, Lee, Pei, Weber 2015){p_end}
 {p 4 8}First estimate the fuzzy CCT bandwidths using {cmd:altfrdbwselect} included in the package{p_end}
 {p 8 12}{cmd:. altfrdbwselect Y x, c(0) fuzzy(T) deriv(0) p(1) q(2) kernel(uniform) bwselect(CCT)}{p_end}
-{p 8 12}{cmd:. local fbw_h=e(h_F_CCT)}{p_end}
-{p 8 12}{cmd:. local fbw_b=e(b_F_CCT)}{p_end}
+{p 8 12}{cmd:. local fbw_h=r(h_F_CCT)}{p_end}
+{p 8 12}{cmd:. local fbw_b=r(b_F_CCT)}{p_end}
 {p 4 8}Then estimate the MSE by passing the "fuzzy CCT" bandwidths as arguments{p_end}
 {p 8 12}{cmd:. rdmse Y x, c(0) fuzzy(T) deriv(0) p(1) h(`fbw_h') b(`fbw_b') kernel(uniform)}{p_end}
 
-{p 4 8}Estimate the MSE of the fuzzy local linear RD estimator with manual bandwidths{p_end}
-{p 8 12}{cmd:. rdmse Y x, c(0) fuzzy(T) deriv(0) p(1) h(0.5) b(1.2) kernel(uniform)}{p_end}
+{p 4 8}Estimate the MSE of a fuzzy local linear RD estimator with manual bandwidths{p_end}
+{p 8 12}{cmd:. rdmse Y x, fuzzy(T) deriv(0) c(0) p(1) h(10) b(20) kernel(uniform)}{p_end}
 
-{p 4 8}Estimate the MSE of the fuzzy local linear RK estimator{p_end}
-{p 8 12}{cmd:. rdmse Y x, c(0) fuzzy(T) deriv(1) p(1) h(0.5) b(1.2) kernel(uniform)}{p_end}
+{p 4 8}Estimate the MSE of a fuzzy local linear RK estimator{p_end}
+{p 8 12}{cmd:. rdmse Y x, fuzzy(T) deriv(1) c(0) p(1) h(10) b(20) kernel(uniform)}{p_end}
 
 {marker saved_results}{...}
 {title:Saved results}
 
 {p 4 8}If {cmd:fuzzy()} and {cmd:twosided} are unspecified, {cmd:rdmse} saves the scalars:{p_end}
-{synopt:{cmd:e(amse_cl)}}estimated (asymptotic) MSE of the conventional sharp estimator{p_end}
-{synopt:{cmd:e(amse_bc)}}estimated (asymptotic) MSE of the bias-corrected sharp estimator{p_end} 
+{synopt:{cmd:r(amse_cl)}}estimated (asymptotic) MSE of the conventional sharp estimator{p_end}
+{synopt:{cmd:r(amse_bc)}}estimated (asymptotic) MSE of the bias-corrected sharp estimator{p_end} 
 
 {p 4 8}If {cmd:twosided} is specified, {cmd:rdmse} saves the scalars:{p_end}
-{synopt:{cmd:e(amse_l_cl)}}estimated (asymptotic) MSE of the conventional left-side estimator{p_end}
-{synopt:{cmd:e(amse_l_bc)}}estimated (asymptotic) MSE of the bias-corrected left-side estimator{p_end}
-{synopt:{cmd:e(amse_r_cl)}}estimated (asymptotic) MSE of the conventional right-side estimator{p_end}
-{synopt:{cmd:e(amse_r_bc)}}estimated (asymptotic) MSE of the bias-corrected right-side estimator{p_end} 
+{synopt:{cmd:r(amse_l_cl)}}estimated (asymptotic) MSE of the conventional left-side estimator{p_end}
+{synopt:{cmd:r(amse_l_bc)}}estimated (asymptotic) MSE of the bias-corrected left-side estimator{p_end}
+{synopt:{cmd:r(amse_r_cl)}}estimated (asymptotic) MSE of the conventional right-side estimator{p_end}
+{synopt:{cmd:r(amse_r_bc)}}estimated (asymptotic) MSE of the bias-corrected right-side estimator{p_end} 
 	
 {p 4 8}If {cmd:fuzzy()} is specified, {cmd:rdmse} saves the scalars:{p_end}
-{synopt:{cmd:e(amse_F_cl)}}estimated (asymptotic) MSE of the conventional fuzzy estimator{p_end}
-{synopt:{cmd:e(amse_F_bc)}}estimated (asymptotic) MSE of the bias-corrected fuzzy estimator{p_end}
+{synopt:{cmd:r(amse_F_cl)}}estimated (asymptotic) MSE of the conventional fuzzy estimator{p_end}
+{synopt:{cmd:r(amse_F_bc)}}estimated (asymptotic) MSE of the bias-corrected fuzzy estimator{p_end}
 
-{p 4 4}Since {cmd:rdmse_cct2014} only estimates the (asymptotic) MSE of the conventional estimator, it returns {cmd:e(amse_cl)} in the sharp case and {cmd:e(amse_F_cl)} in the fuzzy case.{p_end}
+{p 4 4}Since {cmd:rdmse_cct2014} only estimates the (asymptotic) MSE of the conventional estimator, it returns {cmd:r(amse_cl)} in the sharp case and {cmd:r(amse_F_cl)} in the fuzzy case.{p_end}
 
 {title:Additional Notes}
 
@@ -171,7 +176,10 @@ As with {cmd:rdmse}, it speeds up the computation in Calonico, Cattaneo, Titiuni
 {p 4 8}Calonico, S., M. D. Cattaneo, M. H. Farrell, and R. Titiunik. 2019. Regression Discontinuity Designs Using Covariates. {it:Review of Economics and Statistics} 101(3): 442-451.
 {browse "https://www.mitpressjournals.org/doi/abs/10.1162/rest_a_00760"}.
 
-{p 4 8}Card, D., D. S. Lee, Z. Pei, and A. Weber. 2022. Local Polynomial Order in Regression Discontinuity Designs. {it: Journal of Business and Economic Statistics} 40(3): 1259-1267.
+{p 4 8}Cattaneo, M. D., B. Frandsen, and R. Titiunik. 2015. Randomization Inference in the Regression Discontinuity Design: An Application to Party Advantages in the U.S. Senate. {it:Journal of Causal Inference} 3(1): 1-24.
+{browse "https://www.degruyter.com/document/doi/10.1515/jci-2013-0010"}.
+
+{p 4 8}Pei, Z., D. S. Lee, C. Card, and A. Weber. 2022. Local Polynomial Order in Regression Discontinuity Designs. {it: Journal of Business and Economic Statistics} 40(3): 1259-1267.
 {browse "https://www.tandfonline.com/doi/full/10.1080/07350015.2021.1920961"}.
 
 {title:Author}

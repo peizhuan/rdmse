@@ -5,9 +5,11 @@
 
 *version 1.3 March 2023
 *Updated Stata version number
+*Per Kit Baum's suggestion, changed program from eclass to rclass
+*These changes do not affect any calculation
 
 capture program drop rdmses_cct2014
-program define rdmses_cct2014, eclass
+program define rdmses_cct2014, rclass
 	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) p(real 1) h(real 0) b(real 0) kernel(string) scalepar(real 1)]
 	
@@ -253,7 +255,7 @@ program define rdmses_cct2014, eclass
 	
 		di "The estimated AMSE for the conventional sharp estimator of order `p' is " amse_cl
 		
-		ereturn scalar amse_cl = amse_cl
+		return scalar amse_cl = amse_cl
 			
 			
 	mata mata clear

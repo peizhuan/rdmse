@@ -6,10 +6,12 @@
 
 *version 2.2 March 2023
 *Updated Stata version number
+*Per Kit Baum's suggestion, changed program from eclass to rclass
+*These changes do not affect any calculation
 
 set type double
 capture program drop rdmses
-program define rdmses, eclass
+program define rdmses, rclass
 	version 15.0
 	syntax anything [if] [in] [, c(real 0) deriv(real 0) p(real 1) h(real 0) b(real 0) kernel(string) scalepar(real 1)]
 	
@@ -120,7 +122,7 @@ program define rdmses, eclass
 	local m3_r = m3_r_CCT
 	local m3_l = m3_l_CCT
 		
-	if (e(b_CCT)==.) {
+	if (r(b_CCT)==.) {
 		local mulcol=1
 								}
 								
@@ -301,8 +303,8 @@ program define rdmses, eclass
 		di "the AMSE for the bias-corrected sharp estimator of order `p' cannot be computed."
 					}
 		
-	ereturn scalar amse_cl = amse_cl
-	ereturn scalar amse_bc = amse_bc
+	return scalar amse_cl = amse_cl
+	return scalar amse_bc = amse_bc
 			
 			
 	mata mata clear

@@ -10,10 +10,12 @@
 
 *version 2.3 March 2023
 *Updated Stata version number
+*Per Kit Baum's suggestion, changed program from eclass to rclass
+*These changes do not affect any calculation
 
 set type double
 capture program drop rdmse
-program define rdmse, eclass
+program define rdmse, rclass
 	version 15.0
 	syntax anything [if] [in] [, c(real 0) fuzzy(string) deriv(real 0) p(real 1) h(real 0) b(real 0) kernel(string) scalepar(real 1) ///
 	twosided pl(real 1) pr(real 1) hl(real 0) hr(real 0) bl(real 0) br(real 0)]
