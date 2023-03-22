@@ -1,5 +1,5 @@
-v 2.0
-d Date: 20210110
+v 2.3
+d Date: 20230322
 d rdmse.  MSE estimation for local polynomial RD and RK estimators
 d Zhuan Pei, Cornell University
 f altfrdbwselect.ado
@@ -18,3 +18,4 @@ f rdmses2s.ado
 f rdvce.mo
 f regconst.mo
 f rdmse.sthlp
+f rdrobust_senate.dta
