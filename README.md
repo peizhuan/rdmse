@@ -3,7 +3,15 @@ Companion package to Pei, Lee, Card, Weber (2022), [Local Polynomial Order in Re
 
 `net install rdmse, from(https://raw.githubusercontent.com/peizhuan/rdmse/master) replace`
 
+The package can also be installed from ssc by typing in Stata
+
+`ssc install rdmse, replace`
+
+Please note that the updates to the package on ssc will lag those to the package on Github.  
+
 # Updates
+
+May 15, 2023: Resolved an issue that, since the last update, had prevented the storage of AMSE estimates in various r() scalars (e.g., r(amse_cl)). Thanks to Travis Alan Smith at University of Georgia for bringing this error to my attention. 
 
 March 22, 2023: Added demo data file rdrobust_senate.dta per Kit Baum's suggestion (preparing to submit the package to ssc); changed programs from eclass to rclass; updated package and help file.
 
